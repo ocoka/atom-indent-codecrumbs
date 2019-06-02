@@ -1,0 +1,71 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+@crumbHeight: 12px;
+@crumbWidth: @crumbHeight / 2;
+@back: @tab-bar-background-color;
+@borderColor: @button-background-color;
+
+.crumbColor(@color) {
+  background: @color;
+  &:before,
+  &:after{
+    border-color: @color;
+  }
+  &:before{
+    border-left-color:transparent;
+  }
+  &:after{
+    border-color:transparent;
+    border-left-color:@color;
+  }
+}
+
+indent-codecrumbs,
+.indent-codecrumbs {
+  display: block;
+  list-style:none;
+  color: @text-color-highlight;
+  background: @back;
+  &__el {
+    display: inline-block;
+    font-size: 1.2rem;
+    padding: 2px 4px;
+    position:relative;
+    height: @crumbHeight * 2;
+    line-height: @crumbHeight * 2 - 4;
+    text-align: center;
+    margin-right: @crumbWidth * 2 + 2;
+    vertical-align: middle;
+    &:before,
+    &:after{
+      content: "";
+      position:absolute;
+      top: 0;
+      border-width:0;
+      border-style: solid;
+      border-width:@crumbHeight @crumbWidth;
+      width: 0;
+      height: 0;
+      vertical-align: middle;
+    }
+    &:before{
+      left: @crumbWidth * -2;
+    }
+    &:after{
+      left:100%;
+    }
+    .crumbColor(@borderColor);
+    &.storage {
+      .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), 150));
+    }
+    &.property {
+      .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), 25));
+    }
+    &.control {
+      .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), -50));
+    }
+  }
+}

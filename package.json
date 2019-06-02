@@ -1,0 +1,30 @@
+{
+  "name": "atom-indent-codecrumbs",
+  "main": "./lib/index.js",
+  "version": "0.1.0",
+  "description": "Atom plugin package to add breadcrumbs feature based on code indendation",
+  "keywords": ["breadcrumbs", "atom"],
+  "activationCommands": {
+    "atom-workspace": [
+      "indent-codecrumbs:toggle"
+    ]
+  },
+  "repository": "https://github.com/ocoka/atom-indent-codecrumbs",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "etch": "*"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0"
+  },
+  "configSchema": {
+    "colorCrumbs": {
+      "title": "Colorize crumbs based on grammar",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

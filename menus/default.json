@@ -1,0 +1,14 @@
+{
+  "menu":
+    [
+      {
+        "label": "Packages",
+        "submenu": [
+          {
+            "label": "indent-codecrumbs",
+            "command": "indent-codecrumbs:toggle"
+          }
+        ]
+      }
+    ]
+}
