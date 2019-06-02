@@ -1,9 +1,12 @@
 {
   "name": "atom-indent-codecrumbs",
   "main": "./lib/index.js",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Atom plugin package to add breadcrumbs feature based on code indendation",
-  "keywords": ["breadcrumbs", "atom"],
+  "keywords": [
+    "breadcrumbs",
+    "atom"
+  ],
   "activationCommands": {
     "atom-workspace": [
       "indent-codecrumbs:toggle"
