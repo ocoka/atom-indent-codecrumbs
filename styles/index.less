@@ -39,6 +39,10 @@ indent-codecrumbs,
     text-align: center;
     margin-right: @crumbWidth * 2 + 2;
     vertical-align: middle;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(150%);
+    }
     &:before,
     &:after{
       content: "";
