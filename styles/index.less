@@ -9,57 +9,63 @@
 @borderColor: @button-background-color;
 
 .crumbColor(@color) {
-  background: @color;
-  &:before,
-  &:after{
-    border-color: @color;
-  }
-  &:before{
-    border-left-color:transparent;
-  }
-  &:after{
-    border-color:transparent;
-    border-left-color:@color;
-  }
+	span {
+		background: @color;
+		&:before,
+		&:after{
+			border-color: @color;
+		}
+		&:before{
+			border-left-color:transparent;
+		}
+		&:after{
+			border-color:transparent;
+			border-left-color:@color;
+		}
+	}
 }
 
-indent-codecrumbs,
+indent-codecrumbs {
+	display: block;
+}
 .indent-codecrumbs {
-  display: block;
+  display: flex;
+	flex-flow: nowrap wrap-reverse;
   list-style:none;
   color: @text-color-highlight;
   background: @back;
   &__el {
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 2px 4px;
-    position:relative;
+		text-overflow: ellipsis;
+		overflow-x: hidden;
     height: @crumbHeight * 2;
-    line-height: @crumbHeight * 2 - 4;
     text-align: center;
     margin-right: @crumbWidth * 2 + 2;
     vertical-align: middle;
     cursor: pointer;
+		span {
+			margin-left: -2px;
+			margin-right: -2px;
+			&:before,
+			&:after{
+				content: "";
+				border-width:0;
+				border-style: solid;
+				border-width: @crumbHeight @crumbWidth;
+				width: 0;
+				height: 0;
+			}
+			&:before{
+				margin-left: @crumbWidth * -2;
+			}
+			&:after{
+				left:100%;
+			}
+		}
     &:hover {
       filter: brightness(150%);
-    }
-    &:before,
-    &:after{
-      content: "";
-      position:absolute;
-      top: 0;
-      border-width:0;
-      border-style: solid;
-      border-width:@crumbHeight @crumbWidth;
-      width: 0;
-      height: 0;
-      vertical-align: middle;
-    }
-    &:before{
-      left: @crumbWidth * -2;
-    }
-    &:after{
-      left:100%;
     }
     .crumbColor(@borderColor);
     &.storage {
