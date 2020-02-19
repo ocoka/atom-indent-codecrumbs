@@ -9,75 +9,75 @@
 @borderColor: @button-background-color;
 
 .crumbColor(@color) {
-	> span {
-		background: @color;
-	}
-	&::after {
-		border-left-color: @color;
-	}
-	&:hover + li::before {
-		filter: brightness(150%);
-		border-left-color: @color;
-	}
+  > span {
+    background: @color;
+  }
+  &::after {
+    border-left-color: @color;
+  }
+  &:hover + li::before {
+    filter: brightness(150%);
+    border-left-color: @color;
+  }
 }
 
 indent-codecrumbs {
-	display: block;
+  display: block;
 }
 .indent-codecrumbs {
   display: flex;
-	flex-wrap: nowrap;
+  flex-wrap: nowrap;
   list-style:none;
-	overflow-x: auto;
+  overflow-x: auto;
   color: @text-color-highlight;
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
   &__el {
-		position: relative;
+    position: relative;
     display: inline-flex;
-		height: @crumbHeight * 2;
+    height: @crumbHeight * 2;
     font-size: 1rem;
     text-align: center;
     cursor: pointer;
-		> span {
-			width: 100%;
-			flex-grow: 1;
-			text-overflow: ellipsis;
-			overflow-x: hidden;
-			padding: 0.25em;
-			padding-left: @crumbWidth + 2px;
-		}
-		&:not(:first-child)::before, &::after {
-			content: "";
-			position: absolute;
-			width: 0;
-			height: 0;
-			pointer-events: none;
-		}
-		&:not(:first-child)::before {
-			left: 0;
-			top: 0;
-			bottom: 0;
-			border-left: @crumbWidth solid @back;
-			border-top: @crumbWidth solid transparent;
-	    border-bottom: @crumbWidth solid transparent;
-	    z-index: 0;
-		}
-		&::after {
-	    right: -@crumbWidth + 2px;
-	    top: 2px;
-	    border-left: @crumbWidth - 2px solid @borderColor;
-	    border-top: @crumbWidth - 2px solid transparent;
-	    border-bottom: @crumbWidth - 2px solid transparent;
-	    z-index: 1;
-		}
-		&:last-child::after {
-			top: 0;
-	    right: -@crumbWidth;
-	    border-left: @crumbWidth solid @borderColor;
-	    border-top: @crumbWidth solid transparent;
-	    border-bottom: @crumbWidth solid transparent;
-		}
+    > span {
+      width: 100%;
+      flex-grow: 1;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      padding: 0.25em;
+      padding-left: @crumbWidth + 2px;
+    }
+    &:not(:first-child)::before, &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+    &:not(:first-child)::before {
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-left: @crumbWidth solid @back;
+      border-top: @crumbWidth solid transparent;
+      border-bottom: @crumbWidth solid transparent;
+      z-index: 0;
+    }
+    &::after {
+      right: -@crumbWidth + 2px;
+      top: 2px;
+      border-left: @crumbWidth - 2px solid @borderColor;
+      border-top: @crumbWidth - 2px solid transparent;
+      border-bottom: @crumbWidth - 2px solid transparent;
+      z-index: 1;
+    }
+    &:last-child::after {
+      top: 0;
+      right: -@crumbWidth;
+      border-left: @crumbWidth solid @borderColor;
+      border-top: @crumbWidth solid transparent;
+      border-bottom: @crumbWidth solid transparent;
+    }
     &:hover {
       filter: brightness(150%);
     }
