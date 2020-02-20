@@ -9,7 +9,7 @@
 @borderColor: @button-background-color;
 
 .crumbColor(@color) {
-  > span {
+	.indent-codecrumbs__crumb-text {
     background: @color;
   }
   &::after {
@@ -39,14 +39,6 @@ indent-codecrumbs {
     font-size: 1rem;
     text-align: center;
     cursor: pointer;
-    > span {
-      width: 100%;
-      flex-grow: 1;
-      text-overflow: ellipsis;
-      overflow-x: hidden;
-      padding: 0.25em;
-      padding-left: @crumbWidth + 2px;
-    }
     &:not(:first-child)::before, &::after {
       content: "";
       position: absolute;
@@ -95,4 +87,12 @@ indent-codecrumbs {
       .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), -50));
     }
   }
+	&__crumb-text {
+		width: 100%;
+		flex-grow: 1;
+		text-overflow: ellipsis;
+		overflow-x: hidden;
+		padding: 0.25em;
+		padding-left: @crumbWidth + 2px;
+	}
 }
