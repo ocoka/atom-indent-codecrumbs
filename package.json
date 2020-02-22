@@ -7,11 +7,6 @@
     "breadcrumbs",
     "atom"
   ],
-  "activationCommands": {
-    "atom-workspace": [
-      "indent-codecrumbs:toggle"
-    ]
-  },
   "repository": "https://github.com/ocoka/atom-indent-codecrumbs",
   "license": "MIT",
   "engines": {
@@ -22,12 +17,5 @@
   },
   "devDependencies": {
     "eslint": "^5.9.0"
-  },
-  "configSchema": {
-    "colorCrumbs": {
-      "title": "Colorize crumbs based on grammar",
-      "type": "boolean",
-      "default": false
-    }
   }
 }
