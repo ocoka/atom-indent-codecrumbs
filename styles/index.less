@@ -3,21 +3,32 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
-@crumbHeight: 12px;
-@crumbWidth: @crumbHeight;
-@back: @tab-bar-background-color;
-@borderColor: @button-background-color;
 
-.crumbColor(@color) {
-	.indent-codecrumbs__crumb-text {
-    background: @color;
-  }
+@codecrumbs-height: 12px;
+@codecrumbs-width: 12px;
+@codecrumbs-back: @tab-bar-background-color;
+@codecrumbs-color: @button-background-color;
+@codecrumbs-edge: 2px;
+@codecrumbs-max: 20ch;
+@codecrumbs-min: 5ch;
+
+@colorize: {
+  background: @color;
   &::after {
     border-left-color: @color;
   }
-  &:hover + li::before {
-    filter: brightness(150%);
+  &:hover + .indent-codecrumbs__el::before {
     border-left-color: @color;
+  }
+};
+.codecrumbsAddColor (@color, @token: '') {
+  .indent-codecrumbs {
+    &__el.@{token} when not (@token = '') {
+      @colorize();
+    }
+    &__el when (@token = '') {
+      @colorize();
+    }
   }
 }
 
@@ -34,65 +45,60 @@ indent-codecrumbs {
   padding: 0;
   &__el {
     position: relative;
-    display: inline-flex;
-    height: @crumbHeight * 2;
-    font-size: 1rem;
-    text-align: center;
+    height: @codecrumbs-height * 2;
     cursor: pointer;
+    padding-left: @codecrumbs-width + @codecrumbs-edge;
+    max-width: @codecrumbs-max;
+    min-width: @codecrumbs-min;
     &:not(:first-child)::before, &::after {
       content: "";
       position: absolute;
       width: 0;
       height: 0;
+      top: 0;
+      bottom: 0;
       pointer-events: none;
+      border-top: @codecrumbs-height solid transparent;
+      border-bottom: @codecrumbs-height solid transparent;
     }
     &:not(:first-child)::before {
       left: 0;
-      top: 0;
-      bottom: 0;
-      border-left: @crumbWidth solid @back;
-      border-top: @crumbWidth solid transparent;
-      border-bottom: @crumbWidth solid transparent;
+      border-left: @codecrumbs-width solid @codecrumbs-back;
       z-index: 0;
     }
     &::after {
-      right: -@crumbWidth + 2px;
-      top: 2px;
-      border-left: @crumbWidth - 2px solid @borderColor;
-      border-top: @crumbWidth - 2px solid transparent;
-      border-bottom: @crumbWidth - 2px solid transparent;
+      right: -@codecrumbs-width;
+      border-left: @codecrumbs-width solid @codecrumbs-color;
       z-index: 1;
     }
-    &:last-child::after {
-      top: 0;
-      right: -@crumbWidth;
-      border-left: @crumbWidth solid @borderColor;
-      border-top: @crumbWidth solid transparent;
-      border-bottom: @crumbWidth solid transparent;
+    &:not(:last-child)::after {
+      right: -@codecrumbs-width + @codecrumbs-edge;
+      top: @codecrumbs-edge;
+      border-left-width: @codecrumbs-width - @codecrumbs-edge;
+      border-top-width: @codecrumbs-height - @codecrumbs-edge;
+      border-bottom-width: @codecrumbs-height - @codecrumbs-edge;
     }
-    &:hover {
+    &:hover,
+    &:hover + &::before {
       filter: brightness(150%);
     }
-    .crumbColor(@borderColor);
-    &.storage {
-      .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), 150));
-    }
-    &.property {
-      .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), 25));
-    }
-    &.function {
-      .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), 45));
-    }
-    &.control {
-      .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), -50));
-    }
   }
-	&__crumb-text {
-		width: 100%;
-		flex-grow: 1;
-		text-overflow: ellipsis;
-		overflow-x: hidden;
-		padding: 0.25em;
-		padding-left: @crumbWidth + 2px;
-	}
+  &&_full > &__el {
+    max-width: none;
+    flex-grow: 1;
+  }
+  &__crumb-text {
+    height: 100%;
+    overflow: hidden;
+    font-size: 1rem;
+    text-align: center;
+    text-overflow: ellipsis;
+    padding: .25em;
+    white-space: nowrap;
+  }
 }
+.codecrumbsAddColor(@codecrumbs-color);
+.codecrumbsAddColor(spin(saturate(lighten(@codecrumbs-color, 9), 30), 150), storage);
+.codecrumbsAddColor(spin(saturate(lighten(@codecrumbs-color, 9), 30), 25),  property);
+.codecrumbsAddColor(spin(saturate(lighten(@codecrumbs-color, 9), 30), 45),  function);
+.codecrumbsAddColor(spin(saturate(lighten(@codecrumbs-color, 9), 30), -50), control);
