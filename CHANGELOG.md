@@ -1,3 +1,4 @@
-## 0.1.0 - First Release
-* Every feature added
-* Every bug fixed
+## 1.3.0 - UX and configuration
+* improved UX by @hefler
+* add ability to configure position of crumbs panel (top/bottom)
+* bugfix in code
