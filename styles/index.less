@@ -4,62 +4,74 @@
 // for a full listing of what's available.
 @import "ui-variables";
 @crumbHeight: 12px;
-@crumbWidth: @crumbHeight / 2;
+@crumbWidth: @crumbHeight;
 @back: @tab-bar-background-color;
 @borderColor: @button-background-color;
 
 .crumbColor(@color) {
-  background: @color;
-  &:before,
-  &:after{
-    border-color: @color;
+	.indent-codecrumbs__crumb-text {
+    background: @color;
   }
-  &:before{
-    border-left-color:transparent;
+  &::after {
+    border-left-color: @color;
   }
-  &:after{
-    border-color:transparent;
-    border-left-color:@color;
+  &:hover + li::before {
+    filter: brightness(150%);
+    border-left-color: @color;
   }
 }
 
-indent-codecrumbs,
-.indent-codecrumbs {
+indent-codecrumbs {
   display: block;
+}
+.indent-codecrumbs {
+  display: flex;
+  flex-wrap: nowrap;
   list-style:none;
+  overflow-x: auto;
   color: @text-color-highlight;
-  background: @back;
+  margin: 0;
+  padding: 0;
   &__el {
-    display: inline-block;
-    font-size: 1.2rem;
-    padding: 2px 4px;
-    position:relative;
+    position: relative;
+    display: inline-flex;
     height: @crumbHeight * 2;
-    line-height: @crumbHeight * 2 - 4;
+    font-size: 1rem;
     text-align: center;
-    margin-right: @crumbWidth * 2 + 2;
-    vertical-align: middle;
     cursor: pointer;
-    &:hover {
-      filter: brightness(150%);
-    }
-    &:before,
-    &:after{
+    &:not(:first-child)::before, &::after {
       content: "";
-      position:absolute;
-      top: 0;
-      border-width:0;
-      border-style: solid;
-      border-width:@crumbHeight @crumbWidth;
+      position: absolute;
       width: 0;
       height: 0;
-      vertical-align: middle;
+      pointer-events: none;
     }
-    &:before{
-      left: @crumbWidth * -2;
+    &:not(:first-child)::before {
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-left: @crumbWidth solid @back;
+      border-top: @crumbWidth solid transparent;
+      border-bottom: @crumbWidth solid transparent;
+      z-index: 0;
     }
-    &:after{
-      left:100%;
+    &::after {
+      right: -@crumbWidth + 2px;
+      top: 2px;
+      border-left: @crumbWidth - 2px solid @borderColor;
+      border-top: @crumbWidth - 2px solid transparent;
+      border-bottom: @crumbWidth - 2px solid transparent;
+      z-index: 1;
+    }
+    &:last-child::after {
+      top: 0;
+      right: -@crumbWidth;
+      border-left: @crumbWidth solid @borderColor;
+      border-top: @crumbWidth solid transparent;
+      border-bottom: @crumbWidth solid transparent;
+    }
+    &:hover {
+      filter: brightness(150%);
     }
     .crumbColor(@borderColor);
     &.storage {
@@ -75,4 +87,12 @@ indent-codecrumbs,
       .crumbColor(spin(saturate(lighten(@borderColor, 9), 30), -50));
     }
   }
+	&__crumb-text {
+		width: 100%;
+		flex-grow: 1;
+		text-overflow: ellipsis;
+		overflow-x: hidden;
+		padding: 0.25em;
+		padding-left: @crumbWidth + 2px;
+	}
 }
