@@ -30,3 +30,18 @@ Get scope from notification popup
 8. Feel the difference
 ![Result](https://user-images.githubusercontent.com/8239290/75099188-ce8a9000-55cf-11ea-9ce6-af1b01157a3e.png)
 
+9. You can easily reconfigure component styles
+![styling](https://user-images.githubusercontent.com/8239290/75111197-26fd7400-5648-11ea-99b8-099b4f7c6030.png)
+```less
+// same import 
+@import (reference) 'packages/atom-indent-codecrumbs/styles/index';
+// set parameters
+@codecrumbs-height: 14px; // corners height (crumbs will have height = @codecrumbs-height * 2)
+@codecrumbs-width: 10px; // corners width
+@codecrumbs-max: 26ch; // max crumb width, text will have ellipsis
+@codecrumbs-min: 5ch; // min crumb width
+@codecrumbs-font: 1.2rem; // font-size
+// after parameters set invoke reconfiguration mixin
+.codeCrumbsReconfigure();
+```
+Of course you can do any styling you want just by overriding CSS rules in your user style.less
