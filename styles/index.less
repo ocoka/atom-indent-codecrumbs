@@ -8,9 +8,10 @@
 @codecrumbs-width: 12px;
 @codecrumbs-back: @tab-bar-background-color;
 @codecrumbs-color: @button-background-color;
-@codecrumbs-edge: 2px;
 @codecrumbs-max: 20ch;
 @codecrumbs-min: 5ch;
+@codecrumbs-font: 1rem;
+
 
 @colorize: {
   background: @color;
@@ -31,6 +32,37 @@
     }
   }
 }
+.codeCrumbsReconfigure() {
+  .indent-codecrumbs {
+    &__el {
+      height: @codecrumbs-height * 2;
+      padding-left: @codecrumbs-width + 2px;
+      max-width: @codecrumbs-max;
+      min-width: @codecrumbs-min;
+      &:not(:first-child)::before, &::after {
+        border-top: @codecrumbs-height solid transparent;
+        border-bottom: @codecrumbs-height solid transparent;
+      }
+      &:not(:first-child)::before {
+        border-left: @codecrumbs-width solid @codecrumbs-back;
+      }
+      &::after {
+        right: -@codecrumbs-width;
+        border-left: @codecrumbs-width solid @codecrumbs-color;
+      }
+      &:not(:last-child)::after {
+        right: -@codecrumbs-width + 2px;
+        top: 2px;
+        border-left-width: @codecrumbs-width - 2px;
+        border-top-width: @codecrumbs-height - 2px;
+        border-bottom-width: @codecrumbs-height - 2px;
+      }
+    }
+    &__crumb-text {
+      font-size: @codecrumbs-font;
+    }
+  }
+}
 
 indent-codecrumbs {
   display: block;
@@ -45,11 +77,7 @@ indent-codecrumbs {
   padding: 0;
   &__el {
     position: relative;
-    height: @codecrumbs-height * 2;
     cursor: pointer;
-    padding-left: @codecrumbs-width + @codecrumbs-edge;
-    max-width: @codecrumbs-max;
-    min-width: @codecrumbs-min;
     &:not(:first-child)::before, &::after {
       content: "";
       position: absolute;
@@ -58,25 +86,13 @@ indent-codecrumbs {
       top: 0;
       bottom: 0;
       pointer-events: none;
-      border-top: @codecrumbs-height solid transparent;
-      border-bottom: @codecrumbs-height solid transparent;
     }
     &:not(:first-child)::before {
       left: 0;
-      border-left: @codecrumbs-width solid @codecrumbs-back;
       z-index: 0;
     }
     &::after {
-      right: -@codecrumbs-width;
-      border-left: @codecrumbs-width solid @codecrumbs-color;
       z-index: 1;
-    }
-    &:not(:last-child)::after {
-      right: -@codecrumbs-width + @codecrumbs-edge;
-      top: @codecrumbs-edge;
-      border-left-width: @codecrumbs-width - @codecrumbs-edge;
-      border-top-width: @codecrumbs-height - @codecrumbs-edge;
-      border-bottom-width: @codecrumbs-height - @codecrumbs-edge;
     }
     &:hover,
     &:hover + &::before {
@@ -90,13 +106,21 @@ indent-codecrumbs {
   &__crumb-text {
     height: 100%;
     overflow: hidden;
-    font-size: 1rem;
     text-align: center;
     text-overflow: ellipsis;
     padding: .25em;
     white-space: nowrap;
+    &:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+      width: 0;
+      overflow: hidden;
+    }
   }
 }
+.codeCrumbsReconfigure();
 .codecrumbsAddColor(@codecrumbs-color);
 .codecrumbsAddColor(spin(saturate(lighten(@codecrumbs-color, 9), 30), 150), storage);
 .codecrumbsAddColor(spin(saturate(lighten(@codecrumbs-color, 9), 30), 25),  property);
