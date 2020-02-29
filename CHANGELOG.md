@@ -1,3 +1,5 @@
+## 1.3.2 - JSON crumb filter - do not display any braces
+
 ## 1.3.1 - UX and configuration
 * improved UX by @hefler
 * add ability to configure position of crumbs panel (top/bottom)
