@@ -7,7 +7,7 @@
     "breadcrumbs",
     "atom"
   ],
-  "repository": "git@github.com/ocoka/atom-indent-codecrumbs.git",
+  "repository": "ssh://git@github.com/ocoka/atom-indent-codecrumbs.git",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
